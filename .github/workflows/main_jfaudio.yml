@@ -2,6 +2,7 @@
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 # More info on Python, GitHub Actions, and Azure App Service: https://aka.ms/python-webapps-actions
 
+
 name: Build and deploy Python app to Azure Web App - JFAudio
 
 on:
@@ -32,6 +33,9 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
+          source venv/bin/activate  # Activate virtual environment
+          pip install --upgrade pip
+          pip install streamlit  # Ensure Streamlit is installed
         
       # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
 
@@ -78,6 +82,8 @@ jobs:
           app-name: 'JFAudio'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+
           
       - name: Run Streamlit App
-        run: streamlit run your_app.py --server.port 8501 --server.headless true
+        run: source venv/bin/activate
+          streamlit run your_app.py --server.port 8501 --server.headless true
