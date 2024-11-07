@@ -45,7 +45,7 @@ st.title("The JESUS Film Audio - Recording Database")
 
 # Display the cropped image
 cropped_img = load_cropped_image()
-st.image(cropped_img, use_column_width=True)
+st.image(cropped_img, use_container_width=True)
 
 # Initialize session state
 if 'selected_files' not in st.session_state:
